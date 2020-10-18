@@ -1,4 +1,3 @@
-//валидация параметров 
 let x;
 
 const borders = [];
@@ -74,3 +73,9 @@ function showWarning(warningMessage, paramName) {
 function ID() {
   return '_' + Math.random().toString(36).substr(2, 9);
 }
+
+const checkboxList = document.querySelectorAll('.checkbox');
+checkboxList.forEach(checkBox => checkBox.onchange = function () {
+	checkboxList.forEach(i => i.checked = false );
+	this.checked = true;
+});
