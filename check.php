@@ -1,6 +1,6 @@
 <?php
 
-
+    $start = microtime(true);
 	if (!valuesPresented()) {
 		include 'templates/empty-result.html';
 		return;
@@ -9,8 +9,7 @@
     $X = str_replace(",", "." , $_POST["X"]);
     $Y = str_replace(",", "." , $_POST["Y"]);
     $R = str_replace(",", "." , $_POST["R"]);
-    //TODO: сделать цикл в котором мы смотрим на размерность R параметра, после чего
-    //TODO: для одной точки с разными R проверялась попала ли она в цель или нет и выдавала ответ
+
 
 
     $uniqid = $_POST['uniqid'];
@@ -21,6 +20,20 @@
 		include_once 'templates/empty-result.html';
 		return;
 	}
+	$hit;
+
+        	if (
+        	( ($X>=0) && ($Y>=0) && (pow($X,2)+pow($Y,2)-pow($R,2)<=0))||
+            ( ($X<0) && ($Y>=0) && ((2*$Y-X-$R/2)<=0))||
+            ( ($X>=0) && ($Y<0) && ($X<=$R) && ($Y>=-1*($R/2)))
+        		) {
+        			$hit = "Да";
+
+        		} else {
+
+        			$hit = "Нет";
+
+        		}
 
 
 	if(count($_POST) == 4){
@@ -35,6 +48,8 @@
 	    echo "<tr><td>Результат</td>
 	    		  <td>" . $result . "</td>
 	    	  </tr>";
+
+              	    echo "<tr><td>Текущее Время: </td><td colspan=\"2\" id=\"current-time\"></td></tr>";
 	    echo "</tbody></table>";
 	//----------------------------------------------------------------------------------------------------------------------
 
@@ -74,24 +89,6 @@
 		echo "</tbody></table>";
 
 	}
-	function isHit(){
-	$hit;
-
-    	if (
-    			( ($X >= 0) && ($Y <= 0) && (pow( $X, 2 ) + pow( $Y, 2) <= pow(0.5 * $R, 2))) ||
-    			( ($X >= 0) && ($Y >= 0) && ($X >= $R) && ($Y <= 0.5 * $R)) ||
-    			( ($X <= 0) && ($Y >= 0) && ($Y <= 0.5 * $X + 0.5 * $R))
-    		) {
-    			$hit = "Да";
-
-    		} else {
-
-    			$hit = "Нет";
-
-    		}
-
-	return $hit;
-    }
 
 	function valuesPresented() {
 		return (isset($_POST["X"]) && isset($_POST["Y"]) && isset($_POST["R"]));
@@ -108,5 +105,9 @@
 	function checkR($R, $R_VALUES) {
 		return (is_numeric($R) && strlen($R) <=10 && in_array($R, $R_VALUES));
 	}
-
+echo 'Время выполнения скрипта: '.round(microtime(true) - $start, 4).' сек.';
 ?>
+
+
+
+

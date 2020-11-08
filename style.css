@@ -26,6 +26,16 @@
     margin: 30px 10px 80px 10px ;
 }
 
+
+#run{
+    height: 400px;
+    width: 400px;
+    font-family: fantasy !important;
+    color: black !important;
+    font-size: 20px;
+    text-align: center;
+}
+
 /*=====================================================*/
 
 .horisontal-centering-container{

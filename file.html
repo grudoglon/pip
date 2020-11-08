@@ -42,7 +42,7 @@
 				
 					<div class="parameter-form-container">
 						
-						<!-- BUTTON -->
+						<!-- TEXT -->
 						<div class="parameter-container">
 							<label class="parameter-label">X:</label>
 							<input type="text" name="X" id="X-param" placeholder="(-5 ... 3)" maxlength="10">
@@ -56,34 +56,36 @@
 							<span id="warning-container-Y" class="warning-container"></span>
 						</div>
 
-						<!-- RADIO -->					
+
+						<!-- CHECKBOX -->
 						<div class="parameter-container">
 							<label class="parameter-label">R:</label>
-						    <input type="checkbox" id="R-param1" name="R" value="1.0">
+						    <input type="checkbox" id="R-param1" class="checkbox" name="R" value="1.0">
 						    <label class="parameter-label-R" for="R-param1">1.0</label>
-						    <input type="checkbox" id="R-param2" name="R" value="1.5">
+						    <input type="checkbox" id="R-param2" class="checkbox" name="R" value="1.5">
 						    <label class="parameter-label-R" for="R-param2">1.5</label>
-						    <input type="checkbox" id="R-param3" name="R" value="2.0">
+						    <input type="checkbox" id="R-param3" class="checkbox" name="R" value="2.0">
 						    <label class="parameter-label-R" for="R-param3">2.0</label>
-						    <input type="checkbox" id="R-param4" name="R" value="2.5">
+						    <input type="checkbox" id="R-param4" class="checkbox" name="R" value="2.5">
 						    <label class="parameter-label-R" for="R-param4">2.5</label>
-						    <input type="checkbox" id="R-param5" name="R" value="3.0">
+						    <input type="checkbox" id="R-param5" class="checkbox" name="R" value="3.0">
 						    <label class="parameter-label-R" for="R-param5">3.0</label>
 							<span id="warning-container-R" class="warning-container"></span>
-						
+
 						<div>
 							<input type="hidden" name="uniqid" value="">
-						</div>				 				
-						
+						</div>
+
 						</div>
 						<!-- SUBMIT -->
 						<div class="horisontal-centering-container">
-						
-							<button class="submit-button" type="submit">Отправить</button>
-						
+
+                                <button  class="submit-button" type="submit">Отправить</button>
 						</div>
 					
 					</div>
+
+
 
 				</form>
 
@@ -100,8 +102,44 @@
 			
 		</div>
 
+            <span id="button1" style="position:relative;z-index:10"  onfocus="moveIt();this.blur()">
+                <button id="button" style="background-color:lightgreen;height:50px; width:70px;" onmouseDown="moveIt()" onmouseover="moveIt()" onfocus="moveIt();this.blur()">Поймай</button>
+            </span>
+
+            <script type="text/javascript">
+                function getObj(objID)
+                {
+                    if (document.getElementById) {return document.getElementById(objID);}
+                    else if (document.all) {return document.all[objID];}
+                    else if (document.layers) {return document.layers[objID];}
+                }
+
+                var ie4=document.all
+                var ns6=document.getElementById&&!document.all
+                cobj=getObj("button1");
+
+                var i = false;
+                function moveIt(){
+                    if(i == true) { i = false;}
+                    else { i = true; }
+                    y=Math.floor(Math.random()*301);
+                    x=Math.floor(Math.random()*401);
+                    if (ie4){
+                        cobj.style.top  = y;
+                        cobj.style.left = x;
+                    }
+                    else if (ns6){
+                        cobj.style.top  = y+"px";
+                        cobj.style.left = x+"px";
+                    }
+                    if(i == true){document.getElementById("button").style.backgroundColor = "red";}
+                    else{document.getElementById("button").style.backgroundColor = "blue";}
+                }
+            </script>
 	<script src="js/validate.js"></script>
 	<script src="js/create-chart.js"></script>
+    <script src="js/init.js"></script>
+    <script src="js/run.js"></script>
 </body>
 
 </html>
